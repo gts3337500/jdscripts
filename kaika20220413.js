@@ -62,15 +62,7 @@ let activityCookie =''
   }
   $.activityId = "dz39d46a394915bfa150a01f62shop"
   let authorCodeList = [
-                'e4fc4a09197740b6a5af14e5b2a292f2',
-                '356e89a5311041b69c77d72747044c61',
-                '692a9169274748c4a9b21e57a80874bb',
-				'9d01546b9c0a49d2a31effe8ae49f8f8',
-				'2642ebe802e842e79f9ff36c55409ef3',
-				'da40135157574db8aecdb8d211d57273',
-				'9507c902d20045a3baa7f2efabe8473a',
-				'407dd325a0b540f083a112be3d926e13',
-				'ecd05399df1e42efbe12b803303520de'
+               
             ]
 			
   $.shareUuid = authorCodeList[random(0, authorCodeList.length)]
