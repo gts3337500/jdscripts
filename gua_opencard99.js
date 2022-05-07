@@ -42,7 +42,7 @@ cron:30 3 8-15/3 1 *
 let guaopencard_addSku = "true"
 let guaopencard = "true"
 let guaopenwait = "0"
-let guaopencard_draw = "20"
+let guaopencard_draw = "2"
 
 const $ = new Env('1.8～1.15 联合开卡-99');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -104,13 +104,11 @@ let activityCookie =''
   // return
   $.appkey = '51B59BB805903DA4CE513D29EC448375'
   $.userId = '10299171'
- //$.actId = '23d1937cb5c747409e651d6eab_788'
-  // $.actId = '76364a8cc2b84e05b303_22032002'
-   $.actId = '3ca687d58f5b426_220326'
+  //$.actId = '706d3005c35445f389d_220402'//4.2
+  $.actId = 'e890b8612e1b41cdb20787339_220502'//5.2
+  // $.actId = '760a4824bb7e4e7b9_22050101'//5.1
   $.MixNicks = ''
-  //$.inviteNick = 'Xv1dl4pC69U/jEbum78udF4tLNYA4seuA67MOIYQxEk3Vl9+AVo4NF+tgyeIc6A6kdK3rLBQpEQH9V4tdrrh0w=='
-  $.inviteNick = 'DQCK/ksVMxxhAtP2wbQfI14tLNYA4seuA67MOIYQxEk3Vl9+AVo4NF+tgyeIc6A6kdK3rLBQpEQH9V4tdrrh0w=='
-  console.log('TT最大最帅！！！')
+  $.inviteNick = 'DQCK/ksVMxxhAtP2wbQfI9A1Drq3za4lh6LFLfledF1cdSiqMbCx5edEEaL3RnCSkdK3rLBQpEQH9V4tdrrh0w=='
 //  console.log(`活动地址:https://3.cn/104c6-0Gl`)
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
@@ -268,7 +266,7 @@ function joinShop() {
     let activityId = ``
     if($.shopactivityId) activityId = `,"activityId":${$.shopactivityId}`
     const options = {
-      url: `https://api.m.jd.com/client.action?appid=jd_shop_member&functionId=bindWithVender&body={"venderId":"${$.joinVenderId}","shopId":"${$.joinVenderId}","bindByVerifyCodeFlag":1,"registerExtend":{},"writeChildFlag":0${activityId},"channel":401}&client=H5&clientVersion=9.2.0&uuid=88888&h5st=20220316103927741%3B4917820034065113%3B8adfb%3Btk02wac471c5018nzfjQ07QMnzYF7aGYN8INh7pOROYvT9xfhNG4WoAlspfC9wo4vdX6Q79yOggjkDKhiadrPg2z%2B9k%2B%3B034fb6c85703cf98cb40dfa9ecc91fe0c5aefbd69d361721c900544597f535df%3B3.0%3B1647398367741`,
+      url: `https://api.m.jd.com/client.action?appid=jd_shop_member&functionId=bindWithVender&body={"venderId":"${$.joinVenderId}","shopId":"${$.joinVenderId}","bindByVerifyCodeFlag":1,"registerExtend":{},"writeChildFlag":0${activityId},"channel":401}&client=H5&clientVersion=9.2.0&uuid=88888&h5st=20220412164645241%3B3634d1aeada6d9cd11a7526a3a6ac63e%3B169f1%3Btk02wd66f1d7418nXuLjsmO3oJMCxUqKVwIf4q1WRptKRT3nJSrx01oYYBAylbSuyg4sipnEzyEJOZuFjfG2QERcBtzd%3B6b455234e93be4ec963cd7c575d70882b838ba588149a1f54b69c8d0dacf14da%3B3.0%3B1649753205241`,
       headers: {
         'Content-Type': 'text/plain; Charset=UTF-8',
         'Origin': 'https://api.m.jd.com',
