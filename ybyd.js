@@ -19,7 +19,7 @@ let ybydck= $.isNode() ? (process.env.ybydck ? process.env.ybydck : "") : ($.get
 let allMessage = '';
 let ybydcks = ""
 const logs =0;
-const host='http://mr.meizuanxp.cn/api/coin/'
+const host='http://mr.didava.cn/api/coin/'
 var timestamp = new Date().getTime()
 !(async () => {
   if (typeof $request !== "undefined") {
