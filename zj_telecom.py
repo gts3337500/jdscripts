@@ -350,7 +350,7 @@ class ZJDX:
         url = "https://hdmf.k189.cn/actServ/userJoin/loginByTicket"
         body = {"ticket":ticket,
                 "channelId":"69",
-                "posId":"2255-65089-69"}
+                "posId":"68607-65077-69"}
         headers = {
             "Accept": "application/json, text/plain, */*",
             "Accept-Encoding": "gzip, deflate, br",
@@ -364,7 +364,7 @@ class ZJDX:
             "Host": "hdmf.k189.cn",
             "Origin": "https://hdmf.k189.cn",
             "Pragma": "no-cache",
-            "Referer": f"https://hdmf.k189.cn/signinHd/?aid=B906E608F3BDD49908F1176191A4260B&channelId=61&posId=2055-0-61&posName=81A71A7418D764B0D0BC8294E7027131&channelName=D23F21F5710593990D72A94F16F7D351&ticket={ticket}",
+            "Referer": f"https://hdmf.k189.cn/signinHd/?aid=20EE858C181122D40228E7B020C944ED&channelId=69&posId=68607-65077-69&posName=805E4CA4E8E4775E84327D22047F0BD8&channelName=D23F21F5710593990D72A94F16F7D351&ticket={ticket}",
             "sec-ch-ua": "\"Chromium\";v=\"106\", \"Google Chrome\";v=\"106\", \"Not;A=Brand\";v=\"99\"",
             "sec-ch-ua-mobile": "?0",
             "sec-ch-ua-platform": "\"Windows\"",
@@ -380,7 +380,7 @@ class ZJDX:
         # print(self.csrf_token)
     def check_in(self):
         url = "https://hdmf.k189.cn/actServ/userActivity/querySignInData"
-        body = {"aid":"6E4E000E04F48858480E1C7C3D3FAC88"}
+        body = {"aid":"20EE858C181122D40228E7B020C944ED"}
         headers = {
             "Accept": "application/json, text/plain, */*",
             "Accept-Encoding": "gzip, deflate, br",
@@ -394,7 +394,7 @@ class ZJDX:
             "Host": "hdmf.k189.cn",
             "Origin": "https://hdmf.k189.cn",
             "Pragma": "no-cache",
-            "Referer": f"https://hdmf.k189.cn/signinHd/?aid=6E4E000E04F48858480E1C7C3D3FAC88&channelId=69&posId=2255-65089-69&posName=81A71A7418D764B0D0BC8294E7027131&channelName=D23F21F5710593990D72A94F16F7D351&ticket={self.ticket}",
+            "Referer": f"https://hdmf.k189.cn/signinHd/?aid=20EE858C181122D40228E7B020C944ED&channelId=69&posId=68607-65077-69&posName=805E4CA4E8E4775E84327D22047F0BD8&channelName=D23F21F5710593990D72A94F16F7D351&ticket={self.ticket}",
             "sec-ch-ua": "\"Chromium\";v=\"106\", \"Google Chrome\";v=\"106\", \"Not;A=Brand\";v=\"99\"",
             "sec-ch-ua-mobile": "?0",
             "sec-ch-ua-platform": "\"Windows\"",
@@ -415,11 +415,16 @@ class ZJDX:
         print(data)
         print("----------------")
         if data["code"] == 200:
-            print(f"总计兑换{data['result']['awardsNum'][1]['value']}", f"累积获得{data['result']['awardsNum'][1]['value']}")
-            # push("浙江电信", f"总计兑换{data['result']['awardsNum'][0]['value']}\n累积获得{data['result']['awardsNum'][1]['value']}")
+            for i in data['result']['awardsNum']:
+                print(i['fictitiousType'])
+                if i['fictitiousType'] == "虚拟货币":
+                    print(f"浙江电信 - 天天签到领话费 - {data['result']['userPhone']}", f"累积获得{i['value']}")
+                    push(f"浙江电信 - 天天签到领话费 - {data['result']['userPhone']}", f"累积获得{i['value']}")
+                    if i['value'] - 5.0 >= 0:
+                        self.exchangef()
     def check_in1(self):
         url = "https://hdmf.k189.cn/actServ/userActivity/querySignInData"
-        body = {"aid":"B906E608F3BDD49908F1176191A4260B"}
+        body = {"aid":"478AF5C72927AA8150CE42A033C0C0A8"}
         # self.headers = {
         #     "Accept": "application/json, text/plain, */*",
         #     "Accept-Encoding": "gzip, deflate, br",
@@ -451,7 +456,7 @@ class ZJDX:
         print(data)
     def finish_task(self, taskcode):
         url1 = "https://wapzj.189.cn/zhuanti/hdmf/ActivityHDMF/sendRwPrize.whtml"
-        body = f"activity_id=HDMF1970&taskCode={taskcode}&channelId=61&posCode=2055-0-61"
+        body = f"activity_id=HDMF2819&taskCode={taskcode}&channelId=61&posCode=2055-0-61"
         # cookie = "cityCode=zj; JSESSIONID=940E7946BC83AC8CC3F4EB9A6209FAEB.node1; WT_SS=1668866493827new; X-LB=2.38a.617587e6.1f90;"
         # cookie += ""
         headers = {
@@ -481,13 +486,13 @@ class ZJDX:
         print(self.session.post(url1, headers=headers, data=body).json())
     def share(self):
         url = "https://hdmf.k189.cn/actServ/task/doTask"
-        body = {"taskId":"1657702935631","aid":"B906E608F3BDD49908F1176191A4260B"}
+        body = {"taskId":"1657702935631","aid":"478AF5C72927AA8150CE42A033C0C0A8"}
         data = post(url, headers=self.headers, json=body).json()
         print(data)
 
     def task_login(self, taskcode):
         url = "https://hdmf.k189.cn/actServ/userJoin/loginToWangTingNew"
-        body = {"aid":"B906E608F3BDD49908F1176191A4260B","channel":"2055-0-61","posCode":"2055-0-61","posName":"6BA7AD4FF25C0E4ECB07BF12E9EA4FEC3EA6416930B5BDB8B7DCA5BC2BCC8DA1","channelName":"830156D1FE75A8D582A4B8170D42B295","url":"mall/zhuantixskddts/?channel=raisegame","hdmf_url":f"https://hdmf.k189.cn/acquireHd/?aid=B906E608F3BDD49908F1176191A4260B&channelId=61&posId=2055-0-61&posName=6BA7AD4FF25C0E4ECB07BF12E9EA4FEC3EA6416930B5BDB8B7DCA5BC2BCC8DA1&channelName=830156D1FE75A8D582A4B8170D42B295&channel=2055-0-61&ticket={self.ticket}&secInfo=B7AFDEBFED54CCCC96856D5ECBB7BBB6","channelId":"61","task_code":taskcode,"timer":"15"}
+        body = {"aid":"478AF5C72927AA8150CE42A033C0C0A8","channel":"2055-0-61","posCode":"2055-0-61","posName":"6BA7AD4FF25C0E4ECB07BF12E9EA4FEC3EA6416930B5BDB8B7DCA5BC2BCC8DA1","channelName":"830156D1FE75A8D582A4B8170D42B295","url":"mall/zhuantixskddts/?channel=raisegame","hdmf_url":f"https://hdmf.k189.cn/acquireHd/?aid=478AF5C72927AA8150CE42A033C0C0A8&channelId=61&posId=2055-0-61&posName=6BA7AD4FF25C0E4ECB07BF12E9EA4FEC3EA6416930B5BDB8B7DCA5BC2BCC8DA1&channelName=830156D1FE75A8D582A4B8170D42B295&channel=2055-0-61&ticket={self.ticket}&secInfo=B7AFDEBFED54CCCC96856D5ECBB7BBB6","channelId":"61","task_code":taskcode,"timer":"15"}
         headers = {
             "Accept": "application/json, text/plain, */*",
             "Accept-Encoding": "gzip, deflate, br",
@@ -501,7 +506,7 @@ class ZJDX:
             "Host": "hdmf.k189.cn",
             "Origin": "https://hdmf.k189.cn",
             "Pragma": "no-cache",
-            "Referer": "https://hdmf.k189.cn/acquireHd/?aid=B906E608F3BDD49908F1176191A4260B&channelId=61&posId=2055-0-61&posName=6BA7AD4FF25C0E4ECB07BF12E9EA4FEC3EA6416930B5BDB8B7DCA5BC2BCC8DA1&channelName=830156D1FE75A8D582A4B8170D42B295&channel=2055-0-61&ticket=8b2fac983c75e228e6aa00989fd59980bf9c821217d28511f05a47f33926bcc4d853d31f34668cb8d205bded08058e1b2d47ce19d4b0c44af879745b77967c083f654425de2ce27e06bfb03c2bd34fc5f53077045c23dcd22c3b4fa03cbf8951&secInfo=B7AFDEBFED54CCCC96856D5ECBB7BBB6",
+            "Referer": "https://hdmf.k189.cn/acquireHd/?aid=478AF5C72927AA8150CE42A033C0C0A8&channelId=61&posId=2055-0-61&posName=6BA7AD4FF25C0E4ECB07BF12E9EA4FEC3EA6416930B5BDB8B7DCA5BC2BCC8DA1&channelName=830156D1FE75A8D582A4B8170D42B295&channel=2055-0-61&ticket=8b2fac983c75e228e6aa00989fd59980bf9c821217d28511f05a47f33926bcc4d853d31f34668cb8d205bded08058e1b2d47ce19d4b0c44af879745b77967c083f654425de2ce27e06bfb03c2bd34fc5f53077045c23dcd22c3b4fa03cbf8951&secInfo=B7AFDEBFED54CCCC96856D5ECBB7BBB6",
             "sec-ch-ua": "\"Google Chrome\";v=\"107\", \"Chromium\";v=\"107\", \"Not=A?Brand\";v=\"24\"",
             "sec-ch-ua-mobile": "?0",
             "sec-ch-ua-platform": "\"Windows\"",
@@ -536,13 +541,13 @@ class ZJDX:
     def food(self):
         url1 = "https://hdmf.k189.cn/actServ/task/rTaskTime"
         url = "https://hdmf.k189.cn/actServ/task/bgTimeTask"
-        body = {"taskId": "1657682963913", "aid": "B906E608F3BDD49908F1176191A4260B"}
+        body = {"taskId": "1657682963913", "aid": "478AF5C72927AA8150CE42A033C0C0A8"}
         self.headers = {"Accept": "application/json, text/plain, */*", "Accept-Encoding": "gzip, deflate, br",
                         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7", "access-Control-Allow-Origin": "*",
                         "Cache-Control": "no-cache", "Connection": "keep-alive", "Content-Length": "42",
                         "Content-Type": "application/json;charset=UTF-8", "csrf_token": self.csrf_token,
                         "Host": "hdmf.k189.cn", "Origin": "https://hdmf.k189.cn", "Pragma": "no-cache",
-                        "Referer": f"https://hdmf.k189.cn/acquireHd/?aid=B906E608F3BDD49908F1176191A4260B&channelId=61&posId=2055-0-61&posName=6BA7AD4FF25C0E4ECB07BF12E9EA4FEC3EA6416930B5BDB8B7DCA5BC2BCC8DA1&channelName=830156D1FE75A8D582A4B8170D42B295&channel=2055-0-61&ticket={self.ticket}",
+                        "Referer": f"https://hdmf.k189.cn/acquireHd/?aid=478AF5C72927AA8150CE42A033C0C0A8&channelId=61&posId=2055-0-61&posName=6BA7AD4FF25C0E4ECB07BF12E9EA4FEC3EA6416930B5BDB8B7DCA5BC2BCC8DA1&channelName=830156D1FE75A8D582A4B8170D42B295&channel=2055-0-61&ticket={self.ticket}",
                         "sec-ch-ua": "\"Chromium\";v=\"106\", \"Google Chrome\";v=\"106\", \"Not;A=Brand\";v=\"99\"",
                         "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": "\"Windows\"", "Sec-Fetch-Dest": "empty",
                         "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin",
@@ -561,36 +566,44 @@ class ZJDX:
         except:
             data = post(url, headers=self.headers, json=body).json()
             print(data)
-    def get_score(self):
+    def get_findPrizes(self):
         url = "https://hdmf.k189.cn/actServ/activityData/findPrizes"
-        body = {"aid": "B906E608F3BDD49908F1176191A4260B"}
+        body = {"aid": "478AF5C72927AA8150CE42A033C0C0A8"}
         data = self.session.post(url, headers=self.headers, json=body).json()
         print(data)
         if data["code"] == 200:
-            score = int(data['result']['awardsNum'][0]['value'])
-            print(score)
+            #score = int(data['result']['awardsNum'][0]['value'])
+            #print(score)
             # print(f"当前共有猫粮{str(score)}")
-            return score
+            return data
         return 0
             # push("浙江电信", f"总计兑换{data['result']['awardsNum'][0]['value']}")
     def exchange(self):
         url = "https://hdmf.k189.cn/actServ/userActivity/exchangePrizes"
-        awardIdList = ["8EDCAC7677F290D0F821D0EBE666A26D", "79C2FD1B12135C2F63FAEE603E52E2A3"]
+        awardIdList = ["D620E54E18A4450167EF1D5BC850773A", "050BC9E5C2393C1A58077E921F348883"]
         for awardId in awardIdList:
-            body = {"awardId":awardId,"aid":"4BB166928C96907BE9A485AD2FB58ABF"}
+            body = {"awardId":awardId,"aid":"3982461971B8E15604149E8285CEB4D9"}
             data = post(url, headers=self.headers, json=body).json()
             print(data)
-            sleep(10)
-    def lotter(self):
-        url = "https://hdmf.k189.cn/actServ/userActivity/instantLottery"
-        body = {"authorizerAppid":"null","aid":"A18C6B5B1F70A9CC6983581D10ABC74C"}
+            #sleep(10)
+    def exchangef(self):
+        url = "https://hdmf.k189.cn/actServ/userActivity/exchangePrizes"
+        body = {"awardId":"155469045288AEA7250E4159B1E9823C","aid":"86E252ACA5E948374E4C919D25AAD2C6"}
         data = post(url, headers=self.headers, json=body).json()
         print(data)
+        #sleep(10)
+    def lotter(self):
+        url = "https://hdmf.k189.cn/actServ/userActivity/instantLottery"
+        body = {"authorizerAppid":"null","aid":"60A7108618EB1F845B55000CB4C722C8"}
+        data = post(url, headers=self.headers, json=body).json()
+        print(data)
+        findPrizes = self.get_findPrizes()
+        push(f"浙江电信 - 云养猫小窝 - {findPrizes['result']['userPhone']}", f"{data['result']['massage']}")
     def main(self):
         self.getToken()
         self.loginByTicket(TelecomLogin(account, pwd).main())
         self.food()
-        if datetime.now().hour == 9:
+        if datetime.now().hour == 0:
             self.check_in()
             self.check_in1()
             if datetime.now().day == 1:
@@ -603,8 +616,9 @@ class ZJDX:
                     zjdx.finish_task(taskcode)
                     sleep(15)
                 zjdx.share()
-        if self.get_score() >= 99:
-            print(f"当前猫粮大于100 抽奖")
+        findPrizes = self.get_findPrizes()
+        if findPrizes['result']['awardsNum'][0]['value'] >= 870:
+            print(f"当前猫粮大于870 抽奖")
             self.lotter()
 
 if __name__ == '__main__':
