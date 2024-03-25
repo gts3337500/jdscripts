@@ -16,13 +16,14 @@ if (isGetCookie = typeof $request !== `undefined`) {
     $.done();
 }
 
-
 // 获取签到数据
 function GetCookie() {
     var body = $response.body;
     $.log(body)
     var obj = JSON.parse(body);
     obj.data.MSPS_ENTITY[0].EFFECT_PERIOD_START = "20240326011000"
+    body = JSON.stringify(obj);
+    $.log("修改后body："+body)
     $done({body});
 }
 
