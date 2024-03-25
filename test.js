@@ -1,7 +1,7 @@
 const $ = new Env('建行生活');
 $.msg("开始替换变量")
 
-var response = JSON.parse($request.body);
+var response = JSON.parse($response.body);
 console.log(response)
 response.data.MSPS_ENTITY[0].EFFECT_PERIOD_START = "20240326011000"
 
