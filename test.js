@@ -11,6 +11,7 @@ let bodyArr2 = autoLoginInfo ? autoLoginInfo.split("|") : [];
 $.is_debug = ($.isNode() ? process.env.IS_DEDUG : $.getdata('is_debug')) || 'false';
 
 if (isGetCookie = typeof $request !== `undefined`) {
+  $.msg("开始运行脚本")
   GetCookie();
   $.done();
 } 
