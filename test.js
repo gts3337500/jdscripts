@@ -19,15 +19,12 @@ if (isGetCookie = typeof $request !== `undefined`) {
 
 // 获取签到数据
 function GetCookie() {
-    $.log("开始替换变量")
-    $.log($response.toString());
-    let response = $.toObj($response)
-    response.data.MSPS_ENTITY[0].EFFECT_PERIOD_START = "20240326011000"
-    $done({
-        body: JSON.stringify(response)
-    })
+    var body = $response.body;
+    $.log(body)
+    var obj = JSON.parse(body);
+    obj.data.MSPS_ENTITY[0].EFFECT_PERIOD_START = "20240326011000"
+    $done({body});
 }
-
 
 // 刷新 session
 async function autoLogin() {
