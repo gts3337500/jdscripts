@@ -20,13 +20,12 @@ if (isGetCookie = typeof $request !== `undefined`) {
 // 获取签到数据
 function GetCookie() {
     $.log("开始替换变量")
-    $.log($response);
-    var response = JSON.parse($response);
+    $.log($response.toString());
+    let response = $.toObj($response)
     response.data.MSPS_ENTITY[0].EFFECT_PERIOD_START = "20240326011000"
     $done({
         body: JSON.stringify(response)
     })
-
 }
 
 
