@@ -19,9 +19,7 @@ if (isGetCookie = typeof $request !== `undefined`) {
 
 // 获取签到数据
 function GetCookie() {
-  debug($request.headers);
-  debug($request.body);
-  const headers = ObjectKeys2LowerCase($request.headers);  // 将 headers 的所有 key 转换为小写以兼容各个代理 App
+  $.log($request.body);
 
 }
 
